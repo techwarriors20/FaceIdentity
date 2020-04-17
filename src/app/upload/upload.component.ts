@@ -9,7 +9,7 @@ import { HttpEventType, HttpClient } from '@angular/common/http';
 export class UploadComponent implements OnInit {
   public progress: number;
   public message: string;
-  public webpath: string;
+  public imageurl: string;
 
   @Output() public onUploadFinished = new EventEmitter();
 
@@ -27,17 +27,17 @@ export class UploadComponent implements OnInit {
     const formData = new FormData();
     formData.append('file', fileToUpload, fileToUpload.name);
 
-    this.http.post('https://localhost:5001/api/upload', formData, {reportProgress: true, observe: 'events'})
+    this.http.post('https://faceupload.azurewebsites.net/api/upload', formData, {reportProgress: true, observe: 'events'})
       .subscribe(event => {
         if (event.type === HttpEventType.UploadProgress)
           this.progress = Math.round(100 * event.loaded / event.total);
         else if (event.type === HttpEventType.Response) {
+          this.imageurl = JSON.parse(JSON.stringify(event.body)).imageUrl;
+          localStorage["imageurl"] = this.imageurl;
           this.message = 'Upload success.';
-          this.webpath = JSON.parse(JSON.stringify(event.body)).imageUrl;
-          console.log('print1:'+ JSON.stringify(this.webpath));                 
-          this.onUploadFinished.emit(event.body);          
+          this.onUploadFinished.emit(event.body);
         }
       });
-  } 
- 
+  }
+  
 }

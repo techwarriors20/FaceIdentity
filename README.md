@@ -1,4 +1,4 @@
-# Face API Explorer
+# Face Identity
 
 This is a simple demo app to show how to use the [Microsoft Cognitive Services Face API](https://azure.microsoft.com/en-us/services/cognitive-services/face/).
 

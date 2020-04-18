@@ -10,10 +10,16 @@ export class InputBoxComponent implements OnInit {
   public properties: InputModalProperties;
   public inputValue = '';
   public response: {'imageUrl': ''}; 
-
+  public showUpload = false;
+  
   constructor(public activeModal: NgbActiveModal) { }
 
-  ngOnInit() { }
+  ngOnInit() {    
+    if (this.properties.title == "Add Face")
+      this.showUpload = true;
+    else
+      this.showUpload = false;
+   }
 
   save() {
     this.activeModal.close(this.inputValue);

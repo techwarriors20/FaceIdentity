@@ -17,24 +17,26 @@
       <div class="form-group">
         <label>Image URL:</label>
         <input type="text" class="form-control" name="groupName" [(ngModel)]="imageUrl">
-        <app-upload (onUploadFinished)="uploadFinished($event)"></app-upload>
-        
+        <app-upload (onUploadFinished)="uploadFinished($event)"></app-upload>  
+           
       </div>
-
-      <app-camera (pictureTaken)="handleImage($event)"></app-camera>
-      <div class="snapshot" *ngIf="webcamImage">
-        <img [src]="webcamImage.imageAsDataUrl" />
-      </div>
-
-      <button class="btn btn-primary mr-sm-2" (click)="detect()">Detect</button>
-      <button class="btn btn-primary" (click)="identify()">Identify</button>
-      <button class="btn btn-primary" (click)="Verify()">Verify</button>
+      <button class="btn btn-primary btn-sm" (click)="OpenCapture()">{{cameraButtonText}}</button>  
+      <!--button class="btn btn-primary btn-sm" (click)="detect()">Detect</button>
+      <button class="btn btn-primary btn-sm" (click)="identify()">Identify</button-->
+      <button class="btn btn-primary btn-sm" (click)="Verify()">Verify Person</button>
       
-      <hr/>
+      <div class="card" *ngIf="showCamera">
+      <app-camera class="card" (pictureTaken)="handleImage($event)"></app-camera>
+      <div class="card" *ngIf="webcamImage">
+        <a href="{{imageUrl}}" >
+        <img [src]="webcamImage.imageAsDataUrl" />
+      </a>
+      </div>
+    </div>
 
     <div *ngIf="name">
-      <ngb-alert>
-        Person Identified : <strong>{{name}}</strong>
+      <ngb-alert>       
+        Person Identified : <strong>{{name}}</strong>        
       </ngb-alert>
     </div>
 
@@ -43,13 +45,14 @@
       </div>
       <div *ngIf="selectedFace && selectedFace.identifiedPerson">
         <ngb-alert>
-          Subject Identified: {{selectedFace.name}}
+          Identified Person Name: {{selectedFace.name}}
+          
         </ngb-alert>
       </div>
     </div>
   </div>
 
-  <div class="card">
+  <div class="card" >
 
     <div class="mainImgContainer" *ngIf="imageUrl">
       <img #mainImg class="card-img main-img" [src]="imageUrl" (load)="imageLoaded($event)" />
@@ -59,8 +62,5 @@
         [style.height.px]="item.faceRectangle.height * multiplier" [style.width.px]="item.faceRectangle.width * multiplier"></div>
 
     </div>
-
   </div>
-
-
 </div>

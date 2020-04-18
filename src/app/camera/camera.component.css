@@ -1,0 +1,28 @@
+
+webcam
+{
+    position: inherit;     
+    right: 0; 
+    bottom: 0;
+    min-width: 50%; 
+    min-height: 50%;
+    width: auto; 
+    height: auto; 
+    z-index:auto;
+    background-size: auto;
+    overflow: auto;
+    text-align: left;
+}
+.actionBtn {
+    margin-left: 15px;
+    font-size: 2em;
+    cursor: pointer;
+  }  
+  .snapshot {
+    text-align: center;   
+  }
+  
+  ul.links {
+    padding-bottom: 20px;
+  }
+  

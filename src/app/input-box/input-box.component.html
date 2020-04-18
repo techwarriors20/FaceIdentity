@@ -7,6 +7,7 @@
     <div class="form-group">
       <label>{{properties.message}}</label>
       <input name="inputValue" type="text" class="form-control" [(ngModel)]="inputValue">
+      <app-upload (onUploadFinished)="uploadFinished($event)"></app-upload> 
     </div>
   </form>
 </div>

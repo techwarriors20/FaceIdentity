@@ -9,6 +9,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 export class InputBoxComponent implements OnInit {
   public properties: InputModalProperties;
   public inputValue = '';
+  public response: {'imageUrl': ''}; 
 
   constructor(public activeModal: NgbActiveModal) { }
 
@@ -16,6 +17,13 @@ export class InputBoxComponent implements OnInit {
 
   save() {
     this.activeModal.close(this.inputValue);
+  }
+
+  public uploadFinished = (event) => {
+    this.response = event;
+    this.inputValue =  localStorage["imageurl"];
+    console.log('imge url:'+ this.inputValue);  
+     
   }
 }
 

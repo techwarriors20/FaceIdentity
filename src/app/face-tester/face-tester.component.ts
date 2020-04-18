@@ -23,6 +23,8 @@ export class FaceTesterComponent implements OnInit {
   public selectedGroupId = '';
   public response: {'imageUrl': ''}; 
   public name: string;
+  public showCamera = false;
+  public cameraButtonText = 'Open Camera';
   @ViewChild('mainImg') mainImg;
   @ViewChild('UploadComponent') uploadComponent;
   
@@ -30,6 +32,8 @@ export class FaceTesterComponent implements OnInit {
   public webcamImage: WebcamImage = null;  
   handleImage(webcamImage: WebcamImage) {
     this.webcamImage = webcamImage;
+    console.log(this.webcamImage.imageAsBase64);
+    this.Base64ToImage();
   }
 
   constructor(private faceApi: FaceApiService) { }
@@ -156,7 +160,55 @@ export class FaceTesterComponent implements OnInit {
   public uploadFinished = (event) => {
     this.response = event;
     this.imageUrl =  localStorage["imageurl"];
-    console.log('imge url:'+ this.imageUrl);
-    
+    console.log('imge url:'+ this.imageUrl);  
+    this.showCamera = false;  
   }
+
+  OpenCapture()
+  {
+    if (this.showCamera)
+    {
+      this.showCamera = false;
+      this.cameraButtonText = "Open Camera";
+    }
+    else
+    {
+      this.showCamera = true;
+      this.cameraButtonText = "Close Camera";
+    }
+  }
+
+  Base64ToImage()
+  {
+    // Base64 url of image trimmed one without data:image/png;base64
+     // string base64="/9j/4AAQSkZJRgABAQE...";
+      var base64 = this.webcamImage.imageAsBase64;
+      // Naming the image
+      const date = new Date().valueOf();
+      let text = '';
+      const possibleText = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+      for (let i = 0; i < 5; i++) {
+        text += possibleText.charAt(Math.floor(Math.random() *    possibleText.length));
+      }
+      // Replace extension according to your media type
+      const imageName = date + '.' + text + '.jpeg';
+      // call method that creates a blob from dataUri
+      const imageBlob = this.dataURItoBlob(base64);
+      const imageFile = new File([imageBlob], imageName, { type: 'image/jpeg' });
+      var generatedImage =  window.URL.createObjectURL(imageFile);
+      this.imageUrl = generatedImage;    
+      window.open(generatedImage);
+      //this.imageUrl = imageFile;
+  }
+
+  dataURItoBlob(dataURI) {
+    const byteString = window.atob(dataURI);
+    const arrayBuffer = new ArrayBuffer(byteString.length);
+    const int8Array = new Uint8Array(arrayBuffer);
+    for (let i = 0; i < byteString.length; i++) {
+      int8Array[i] = byteString.charCodeAt(i);
+    }
+    const blob = new Blob([int8Array], { type: 'image/jpeg' });    
+    return blob;
+ }
 }

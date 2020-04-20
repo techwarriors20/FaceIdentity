@@ -12,7 +12,7 @@ export class FindSimilarComponent implements OnInit {
   public faces: any[];
   public loading = false;
   public imageUrls: string[];
-  public queryFace: string = 'https://psfaceapicourse.blob.core.windows.net/individuals/steve4.png';
+  public queryFace: string ;
   public findSimilarResults: any[];
 
   constructor(private faceApi: FaceApiService) { }

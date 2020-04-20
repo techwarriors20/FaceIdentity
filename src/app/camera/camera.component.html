@@ -6,11 +6,11 @@
 		<div class="row">
 			<div class="actionBtn" (click)="triggerSnapshot();" title="Take Picture">📸</div>
 			<div>
-				<span class="upload" *ngIf="progress > 0">
-				  {{progress}}%
+				<span class="upload" *ngIf="imgprogress > 0">
+				  {{imgprogress}}%
 				</span>
-				<span class="upload" *ngIf="message">
-				  {{message}}
+				<span class="upload" *ngIf="imgmessage">
+				  {{imgmessage}}
 				</span>
 			  </div>
 			<div class="actionBtn" (click)="showNextWebcam(true);" title="Switch Camera">🔁</div>			

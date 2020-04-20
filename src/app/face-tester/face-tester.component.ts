@@ -34,6 +34,7 @@ export class FaceTesterComponent implements OnInit {
     this.webcamImage = webcamImage;
     console.log(this.webcamImage.imageAsBase64);
     this.imageUrl = localStorage["imageurl"] ;
+    this.showCamera = false;
   }
 
   constructor(private faceApi: FaceApiService) { }
@@ -177,45 +178,5 @@ export class FaceTesterComponent implements OnInit {
       this.cameraButtonText = "Close Camera";
     }
   }
-
-  Base64ToImage()
-  {
-    // Base64 url of image trimmed one without data:image/png;base64
-     // string base64="/9j/4AAQSkZJRgABAQE...";
-      var base64 = this.webcamImage.imageAsBase64;
-      // Naming the image
-      const date = new Date().valueOf();
-      let text = '';
-      const possibleText = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-      for (let i = 0; i < 5; i++) {
-        text += possibleText.charAt(Math.floor(Math.random() *    possibleText.length));
-      }
-      // Replace extension according to your media type
-      const imageName = date + '.' + text + '.jpeg';
-      // call method that creates a blob from dataUri
-      const imageBlob = this.dataURItoBlob(base64);
-      const imageFile = new File([imageBlob], imageName, { type: 'image/jpeg' });
-      const formData = new FormData();
-      formData.append('file', imageBlob, imageFile.name);
-
-     // var fd = new FormData(form);
-      //fd.append("image", blob);
-
-      //var generatedImage =  window.URL.createObjectURL(imageFile);
-      //this.imageUrl = generatedImage;    
-      //window.open(generatedImage);
-      
-      //this.imageUrl = imageFile.name;
-  }
-
-  dataURItoBlob(dataURI) {
-    const byteString = window.atob(dataURI);
-    const arrayBuffer = new ArrayBuffer(byteString.length);
-    const int8Array = new Uint8Array(arrayBuffer);
-    for (let i = 0; i < byteString.length; i++) {
-      int8Array[i] = byteString.charCodeAt(i);
-    }
-    const blob = new Blob([int8Array], { type: 'image/jpeg' });    
-    return blob;
- }
+  
 }

@@ -33,7 +33,7 @@ export class FaceTesterComponent implements OnInit {
   handleImage(webcamImage: WebcamImage) {
     this.webcamImage = webcamImage;
     console.log(this.webcamImage.imageAsBase64);
-    this.Base64ToImage();
+    this.imageUrl = localStorage["imageurl"] ;
   }
 
   constructor(private faceApi: FaceApiService) { }
@@ -195,10 +195,17 @@ export class FaceTesterComponent implements OnInit {
       // call method that creates a blob from dataUri
       const imageBlob = this.dataURItoBlob(base64);
       const imageFile = new File([imageBlob], imageName, { type: 'image/jpeg' });
-      var generatedImage =  window.URL.createObjectURL(imageFile);
-      this.imageUrl = generatedImage;    
-      window.open(generatedImage);
-      //this.imageUrl = imageFile;
+      const formData = new FormData();
+      formData.append('file', imageBlob, imageFile.name);
+
+     // var fd = new FormData(form);
+      //fd.append("image", blob);
+
+      //var generatedImage =  window.URL.createObjectURL(imageFile);
+      //this.imageUrl = generatedImage;    
+      //window.open(generatedImage);
+      
+      //this.imageUrl = imageFile.name;
   }
 
   dataURItoBlob(dataURI) {

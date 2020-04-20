@@ -5,7 +5,15 @@
 		 (initError)="handleInitError($event)"></webcam>
 		<div class="row">
 			<div class="actionBtn" (click)="triggerSnapshot();" title="Take Picture">📸</div>
-			<div class="actionBtn" (click)="showNextWebcam(true);" title="Switch Camera">🔁</div>
+			<div>
+				<span class="upload" *ngIf="progress > 0">
+				  {{progress}}%
+				</span>
+				<span class="upload" *ngIf="message">
+				  {{message}}
+				</span>
+			  </div>
+			<div class="actionBtn" (click)="showNextWebcam(true);" title="Switch Camera">🔁</div>			
 		</div>
 	</div>
 </div>

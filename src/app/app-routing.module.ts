@@ -5,13 +5,15 @@ import { ConfigurationComponent } from './configuration/configuration.component'
 import { FaceTesterComponent } from './face-tester/face-tester.component';
 import { FaceGroupingComponent } from './face-grouping/face-grouping.component';
 import { FindSimilarComponent } from './find-similar/find-similar.component';
+import { UploadblobComponent } from './uploadblob/uploadblob.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent},
   { path: 'configuration', component: ConfigurationComponent},
   { path: 'test-faces', component: FaceTesterComponent},
   { path: 'face-grouping', component: FaceGroupingComponent },
-  { path: 'find-similar', component: FindSimilarComponent }
+  { path: 'find-similar', component: FindSimilarComponent },
+  { path: 'uploadblob', component: UploadblobComponent }
 ];
 
 @NgModule({

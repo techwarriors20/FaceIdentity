@@ -3,6 +3,7 @@ import * as _ from 'lodash';
 import { FaceApiService } from '../services/face-api-service.service';
 import { forkJoin } from 'rxjs/observable/forkJoin';
 
+
 @Component({
   selector: 'app-face-grouping',
   templateUrl: './face-grouping.component.html',
@@ -13,7 +14,8 @@ export class FaceGroupingComponent implements OnInit {
   public faces: any[];
   public groupingResults: any = {};
   public loading = false;
-
+ 
+ 
   constructor(private faceApi: FaceApiService) { }
 
   ngOnInit() { }
@@ -45,5 +47,7 @@ export class FaceGroupingComponent implements OnInit {
     var face = _.find(this.faces, { faceId: faceId });
     return face.url;
   }
+
+  
 
 }

@@ -22,6 +22,7 @@ import { FindSimilarComponent } from './find-similar/find-similar.component';
 import { UploadComponent } from './upload/upload.component';
 import { CameraComponent } from './camera/camera.component';
 import {WebcamModule} from 'ngx-webcam';
+import { UploadblobComponent } from './uploadblob/uploadblob.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import {WebcamModule} from 'ngx-webcam';
     FaceGroupingComponent,
     FindSimilarComponent,
     UploadComponent,
-    CameraComponent
+    CameraComponent,
+    UploadblobComponent
   ],
   imports: [
     BrowserModule,

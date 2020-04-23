@@ -11,6 +11,7 @@ export class UploadblobComponent implements OnInit {
   public progress: number;
   public message: string;
   public imageurl: string;
+  public name: string;
   public inputValue = '';
   public response: {'imageUri': ''}; 
   public showImage = false;
@@ -29,14 +30,15 @@ export class UploadblobComponent implements OnInit {
     const formData = new FormData();
     formData.append('file', fileToUpload, fileToUpload.name);
 
-    this.http.post('https://faceupload.azurewebsites.net/api/Upload/UploadAzure', formData, {reportProgress: true, observe: 'events'})
+    this.http.post('https://localhost:5001/api/Upload/UploadAzure', formData, {reportProgress: true, observe: 'events'})
       .subscribe(event => {
         if (event.type === HttpEventType.UploadProgress)
           this.progress = Math.round(100 * event.loaded / event.total);
         else if (event.type === HttpEventType.Response) {
           this.imageurl = JSON.parse(JSON.stringify(event.body)).imageUri;
+          this.name = JSON.parse(JSON.stringify(event.body)).person.name;
           localStorage["imageurl"] = this.imageurl;
-          this.message = 'Upload success.';
+          this.message = 'Upload success & Email sent';
           console.log(this.imageurl);
           this.showImage = true;
           console.log('show image:' + this.showImage);

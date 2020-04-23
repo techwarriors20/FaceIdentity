@@ -1,3 +1,7 @@
+<div class="card">
+    <h3 class="card-header">Face Surveillance</h3>
+    <div class="card-body">
+
 <form class="form">
   <label>Upload Image To Azure Blob</label>
   <input name="inputValue" type="text" class="form-control" [(ngModel)]="imageurl">
@@ -17,6 +21,10 @@
   </span>
 </div>
 </div>
+
 <div class="mainImgContainer"  *ngIf="showImage">
+  Identified Person: <h6>{{name}}</h6>
   <img  class="card-img main-img" [src]="imageurl"  />
   </div>
+    </div>
+</div>

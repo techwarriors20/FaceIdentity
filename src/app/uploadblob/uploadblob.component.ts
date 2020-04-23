@@ -30,7 +30,7 @@ export class UploadblobComponent implements OnInit {
     const formData = new FormData();
     formData.append('file', fileToUpload, fileToUpload.name);
 
-    this.http.post('https://localhost:5001/api/Upload/UploadAzure', formData, {reportProgress: true, observe: 'events'})
+    this.http.post('https://faceupload.azurewebsites.net/api/Upload/UploadAzure', formData, {reportProgress: true, observe: 'events'})
       .subscribe(event => {
         if (event.type === HttpEventType.UploadProgress)
           this.progress = Math.round(100 * event.loaded / event.total);
